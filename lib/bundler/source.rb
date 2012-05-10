@@ -531,6 +531,7 @@ module Bundler
             Bundler.ui.info "Updating #{uri}"
             in_path do
               git %|fetch --force --quiet --tags #{uri_escaped} "refs/heads/*:refs/heads/*"|
+              git %|fetch --force --quiet #{uri_escaped} "refs/heads/*:refs/heads/*"|
             end
           else
             Bundler.ui.info "Fetching #{uri}"
@@ -549,6 +550,7 @@ module Bundler
 
           Dir.chdir(destination) do
             git %|fetch --force --quiet --tags "#{path}"|
+            git %|fetch --force --quiet "#{path}"|
             git "reset --hard #{@revision}"
 
             if submodules
